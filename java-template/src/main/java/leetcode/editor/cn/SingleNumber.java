@@ -8,21 +8,17 @@ public class SingleNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int singleNumber(int[] nums) {
-            HashMap<Integer, Integer> map = new HashMap<>();
+            Map<Integer, Integer> map = new HashMap<>();
             for (int i : nums) {
-                if (!map.containsKey(i)) {
-                    map.put(i, 1);
-                } else {
-                    map.put(i, map.get(i) + 1);
-                }
+                map.put(i, map.getOrDefault(i, 0) + 1);
             }
-            int res = 0;
+
             for (int i : map.keySet()) {
                 if (map.get(i) == 1) {
-                    res = i;
+                    return i;
                 }
             }
-            return res;
+            return -1;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
