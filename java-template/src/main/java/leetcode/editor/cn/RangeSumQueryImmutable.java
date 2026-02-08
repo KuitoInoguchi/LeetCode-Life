@@ -7,19 +7,17 @@ public class RangeSumQueryImmutable {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class NumArray {
-        private int[] data;
+        private int[] preSum;
 
         public NumArray(int[] nums) {
-            data = new int[nums.length];
-            System.arraycopy(nums, 0, data, 0, nums.length);
+            preSum = new int[nums.length + 1];
+            for (int i = 1; i <= nums.length; i++) {
+                preSum[i] = preSum[i - 1] + nums[i - 1];
+            }
         }
 
         public int sumRange(int left, int right) {
-            int sum = 0;
-            for (int i = left; i <= right; i++) {
-                sum += data[i];
-            }
-            return sum;
+            return preSum[right + 1] - preSum[left];
         }
     }
 
