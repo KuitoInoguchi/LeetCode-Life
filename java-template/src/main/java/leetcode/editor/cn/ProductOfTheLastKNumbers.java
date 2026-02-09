@@ -7,23 +7,29 @@ public class ProductOfTheLastKNumbers {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class ProductOfNumbers {
-        List<Integer> data;
+        List<Integer> preProd;
 
         public ProductOfNumbers() {
-            data = new LinkedList<>();
+            preProd = new LinkedList<>();
+            preProd.add(1);
         }
         
         public void add(int num) {
-            data.add(num);
+            if (num == 0) {
+                preProd.clear();
+                preProd.add(1);
+                return;
+            }
+            int n = preProd.size();
+            preProd.add(preProd.get(n - 1) * num);
         }
         
         public int getProduct(int k) {
-            int res = 1;
-            int n = data.size();
-            for (int i = n - 1; i >= n - k; i--) {
-                res *= data.get(i);
+            int n = preProd.size();
+            if (k > n - 1) {
+                return 0;
             }
-            return res;
+            return preProd.get(n - 1) / preProd.get(n - 1 - k);
         }
     }
     

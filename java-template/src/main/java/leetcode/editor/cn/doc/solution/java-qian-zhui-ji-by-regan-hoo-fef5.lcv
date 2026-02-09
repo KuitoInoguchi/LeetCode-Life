@@ -1,0 +1,41 @@
+### 解题思路
+
+此处撰写解题思路
+
+### 代码
+
+* java
+
+```java
+/*
+【前缀积】
+
+*/
+class ProductOfNumbers {
+    List<Integer> preProducts;
+    int size;
+
+    public ProductOfNumbers() {
+        preProducts = new ArrayList<>();
+        size = 0;
+    }
+
+    public void add(int num) {
+        if (num == 0) {
+            preProducts.clear();
+            size = 0;
+        } else {
+            if (size == 0) preProducts.add(num);
+            else preProducts.add(preProducts.get(size - 1) * num);
+            size++;
+        }
+    }
+
+    public int getProduct(int k) {
+        if (size < k) return 0;
+        if (size == k) return preProducts.get(size - 1);
+        return preProducts.get(size - 1) / preProducts.get(size - 1 - k);
+    }
+}
+```
+
