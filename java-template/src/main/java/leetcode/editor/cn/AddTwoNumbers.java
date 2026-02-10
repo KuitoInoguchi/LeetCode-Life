@@ -21,21 +21,21 @@ public class AddTwoNumbers {
             ListNode p1 = l1, p2 = l2;
             ListNode sentinel = new ListNode(0);
             ListNode p = sentinel;
-            while (p1 != null || p2 != null) {
-                int digitSum = p1.val + p2.val;
-                p.next = new ListNode(digitSum % 10);
-                p1 = p1.next;
-                p2 = p2.next;
+            int carry = 0;
+            while (p1 != null || p2 != null || carry > 0) {
+                int sum = carry;
+                if (p1 != null) {
+                    sum += p1.val;
+                    p1 = p1.next;
+                }
+                if (p2 != null) {
+                    sum += p2.val;
+                    p2 = p2.next;
+                }
+                carry = sum / 10;
+                sum = sum % 10;
+                p.next = new ListNode(sum);
                 p = p.next;
-                if (digitSum >= 10) {
-                    p1.val += 1;
-                }
-                if (p1.next == null) {
-                    p1.next = new ListNode(0);
-                }
-                if (p2.next == null) {
-                    p2.next = new ListNode(0);
-                }
             }
             return sentinel.next;
         }
